@@ -1,8 +1,9 @@
 name: Build desktop
 
+# Tag + PR + manual only — not push to main. Pushing main and a v* tag for the same commit
+# would otherwise trigger this workflow twice. Lint/typecheck/tests run in ci.yml on main.
 on:
   push:
-    branches: [main, master]
     tags: ["v*"]
   pull_request:
   workflow_dispatch:

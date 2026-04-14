@@ -5,54 +5,237 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Download Random API Generator for Windows, macOS, and Linux — CodeFryDev desktop app."
+      content="Random API Generator — documentation and downloads for Windows, macOS, and Linux. Local mock REST API desktop app by CodeFryDev."
     />
-    <title>Download · Random API Generator</title>
+    <title>Documentation &amp; Download · Random API Generator</title>
     <link rel="icon" href="./codefrydev-icon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#0b0e12" />
-    <!-- Fallback when not on *.github.io and repo-config.json fails to load (custom domain / CDN) -->
+    <meta name="theme-color" content="#f5f7fb" />
     <meta name="github-repository" content="codefrydev/RandomApiGenerator" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="backdrop">
-      <div class="download-modal" role="dialog" aria-labelledby="dlg-title">
-        <header class="modal-header">
-          <div>
-            <h1 id="dlg-title">Download Desktop App</h1>
-            <p class="brand-line">
-              Random API Generator ·
-              <a href="https://codefrydev.in" target="_blank" rel="noopener noreferrer">CodeFryDev</a>
-            </p>
-          </div>
+    <a class="skip-link" href="#overview">Skip to content</a>
+
+    <header class="doc-topbar" role="banner">
+      <div class="doc-topbar__inner">
+        <div class="doc-brand">
           <img
-            class="header-logo"
+            class="doc-brand__logo"
             src="./codefrydev-icon.svg"
-            width="44"
-            height="44"
+            width="40"
+            height="40"
             alt=""
           />
-        </header>
-
-        <div class="version-bar" id="version-bar" aria-live="polite">
-          <span id="version-text">Checking latest release…</span>
+          <span class="doc-brand__name">Random API Generator</span>
         </div>
-
-        <div class="platform-list" id="platform-list">
-          <div class="loading-block" id="loading-el">Loading download options…</div>
-        </div>
-
-        <footer class="modal-footer">
-          <a id="footer-source" href="#">Source</a>
-          ·
-          <a id="footer-releases" href="#">All releases</a>
-          ·
-          <a id="footer-actions" href="#">Builds</a>
-        </footer>
+        <nav class="doc-toc" aria-label="On this page">
+          <a href="#overview">Overview</a>
+          <a href="#requirements">Requirements</a>
+          <a href="#download">Download</a>
+          <a href="#installation">Install</a>
+          <a href="#security">Security</a>
+          <a href="#support">Support</a>
+        </nav>
       </div>
+    </header>
+
+    <section class="doc-hero" aria-labelledby="hero-title">
+      <div class="doc-hero__inner doc-hero__layout">
+        <div class="doc-hero__copy">
+          <p class="doc-eyebrow">CodeFryDev · Desktop application</p>
+          <h1 id="hero-title" class="doc-hero__title">Documentation &amp; downloads</h1>
+          <p class="doc-hero__lead">
+            Define REST-style routes and serve locally generated JSON from a built-in mock server—ideal for
+            prototyping, demos, and tests without a live backend.
+          </p>
+          <ul class="hero-badges" aria-label="Product highlights">
+            <li>Local mock server</li>
+            <li>SQLite workspaces</li>
+            <li>Faker-style data</li>
+            <li>Windows · macOS · Linux</li>
+          </ul>
+        </div>
+        <div class="doc-hero__visual" aria-hidden="true">
+          <svg class="doc-hero__art" viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="hero-grad-a" x1="48" y1="32" x2="280" y2="248" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#2563eb" stop-opacity="0.22" />
+                <stop offset="1" stop-color="#7c3aed" stop-opacity="0.12" />
+              </linearGradient>
+              <linearGradient id="hero-grad-b" x1="200" y1="40" x2="120" y2="220" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#38bdf8" stop-opacity="0.35" />
+                <stop offset="1" stop-color="#2563eb" stop-opacity="0.08" />
+              </linearGradient>
+            </defs>
+            <rect x="24" y="48" width="272" height="184" rx="20" fill="url(#hero-grad-a)" stroke="#e2e8f0" stroke-width="1" />
+            <rect x="44" y="72" width="120" height="10" rx="5" fill="#cbd5e1" opacity="0.85" />
+            <rect x="44" y="92" width="200" height="8" rx="4" fill="#e2e8f0" />
+            <rect x="44" y="108" width="160" height="8" rx="4" fill="#e2e8f0" />
+            <rect x="44" y="136" width="232" height="72" rx="12" fill="#ffffff" stroke="#e2e8f0" />
+            <circle cx="260" cy="88" r="36" fill="url(#hero-grad-b)" />
+            <rect x="60" y="156" width="88" height="8" rx="4" fill="#93c5fd" opacity="0.9" />
+            <rect x="60" y="172" width="64" height="8" rx="4" fill="#e2e8f0" />
+            <rect x="176" y="156" width="84" height="36" rx="8" fill="#eff6ff" stroke="#bfdbfe" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <div class="doc-page-width">
+      <main class="doc-main" id="main">
+        <section class="doc-section" id="overview" aria-labelledby="overview-heading">
+          <h2 id="overview-heading">Product overview</h2>
+          <p>
+            Random API Generator is an <strong>Electron</strong> desktop application with a <strong>React</strong> and
+            <strong>Vite</strong> front end. A lightweight <strong>Express</strong>-based mock API runs on your machine
+            only; route definitions and workspaces are persisted with <strong>SQLite</strong> (via
+            <code>better-sqlite3</code>). Generated payloads use <strong>Faker</strong>-style data so you can iterate on
+            UI and integration flows quickly.
+          </p>
+        </section>
+
+        <section class="doc-section" id="requirements" aria-labelledby="requirements-heading">
+          <h2 id="requirements-heading">System requirements</h2>
+          <p class="doc-section__intro">
+            Installers are published per platform on GitHub Releases. Use the build that matches your operating system.
+          </p>
+          <div class="doc-table-wrap">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th scope="col">Platform</th>
+                  <th scope="col">Typical artifact</th>
+                  <th scope="col">Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Windows</td>
+                  <td><code>.exe</code> installer</td>
+                  <td>Run the installer; follow the setup wizard.</td>
+                </tr>
+                <tr>
+                  <td>macOS</td>
+                  <td><code>.dmg</code> or <code>.zip</code></td>
+                  <td>Apple Silicon and Intel builds may appear per release.</td>
+                </tr>
+                <tr>
+                  <td>Linux</td>
+                  <td><code>.AppImage</code> and/or <code>.deb</code></td>
+                  <td>Choose portable AppImage or distribution package when both exist.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="doc-note">
+            <strong>Developers</strong> building from source need <strong>Node.js 24+</strong> and npm 10+ (see the
+            repository README). End users installing a release do not need Node.js on the PATH.
+          </p>
+        </section>
+
+        <section class="doc-section doc-section--download" id="download" aria-labelledby="download-heading">
+          <h2 id="download-heading">Download</h2>
+          <p class="doc-section__intro">
+            The latest release is loaded from GitHub. This page detects your desktop environment and highlights the
+            matching installer when it is available.
+          </p>
+
+          <div class="download-panel">
+            <header class="download-panel__header">
+              <div>
+                <h3 class="download-panel__title" id="download-panel-title">Latest release</h3>
+                <p class="download-panel__subtitle">
+                  Random API Generator ·
+                  <a href="https://codefrydev.in" target="_blank" rel="noopener noreferrer">CodeFryDev</a>
+                </p>
+              </div>
+            </header>
+
+            <div class="version-bar" id="version-bar" aria-live="polite">
+              <div class="version-bar__lines">
+                <span id="version-line">Checking latest release…</span>
+                <span id="system-line" class="version-bar__system"></span>
+              </div>
+            </div>
+
+            <div id="releases-list" class="releases-list" aria-label="Recent releases on GitHub"></div>
+
+            <div class="platform-list" id="platform-list">
+              <div class="loading-block" id="loading-el">Loading download options…</div>
+            </div>
+
+            <footer class="modal-footer">
+              <a id="footer-source" href="#">Source</a>
+              ·
+              <a id="footer-releases" href="#">All releases</a>
+              ·
+              <a id="footer-actions" href="#">Builds</a>
+            </footer>
+          </div>
+        </section>
+
+        <section class="doc-section" id="installation" aria-labelledby="installation-heading">
+          <h2 id="installation-heading">Installation</h2>
+          <ul class="doc-list">
+            <li>
+              <strong>Windows:</strong> Download the <code>.exe</code>, run it, and complete the installer. Launch
+              Random API Generator from the Start menu or desktop shortcut.
+            </li>
+            <li>
+              <strong>macOS:</strong> Open the <code>.dmg</code> (or expand the <code>.zip</code>), drag the app into
+              <strong>Applications</strong>, and open it from Launchpad or Finder. If Gatekeeper prompts you, use
+              <em>System Settings → Privacy &amp; Security</em> as needed for apps from identified developers.
+            </li>
+            <li>
+              <strong>Linux (AppImage):</strong> Make the file executable if required (<code>chmod +x
+              *.AppImage</code>), then run it. Optionally integrate with your desktop menu using
+              <code>appimaged</code> or similar tools.
+            </li>
+            <li>
+              <strong>Linux (.deb):</strong> Install with your package manager (for example
+              <code>sudo apt install ./package.deb</code> on Debian-based systems) and start the app from your
+              applications menu.
+            </li>
+          </ul>
+        </section>
+
+        <section class="doc-section" id="security" aria-labelledby="security-heading">
+          <h2 id="security-heading">Security &amp; privacy</h2>
+          <p>
+            The mock HTTP server is intended for <strong>local development</strong>. It binds to
+            <strong>127.0.0.1</strong> only—it is not meant to be exposed to untrusted networks. Do not forward this
+            port to the public internet or run the app in a way that exposes the mock API beyond your machine unless you
+            fully understand the risk.
+          </p>
+        </section>
+
+        <section class="doc-section" id="support" aria-labelledby="support-heading">
+          <h2 id="support-heading">Support &amp; resources</h2>
+          <ul class="doc-list doc-list--links">
+            <li><a id="support-repo" href="#">GitHub repository</a> — source code and issues</li>
+            <li><a id="support-releases" href="#">Releases</a> — all versions and release notes</li>
+            <li><a id="support-actions" href="#">GitHub Actions</a> — desktop build workflow</li>
+            <li>
+              <a href="https://codefrydev.in" target="_blank" rel="noopener noreferrer">codefrydev.in</a> — CodeFryDev
+            </li>
+          </ul>
+        </section>
+      </main>
     </div>
 
-    <!-- OS icons (inline SVG) -->
+    <footer class="doc-page-footer">
+      <p>
+        © CodeFryDev · Random API Generator · Documentation reflects the latest published release when this page can
+        reach the GitHub API.
+      </p>
+    </footer>
+
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
       <symbol id="icon-windows" viewBox="0 0 24 24">
         <path
@@ -72,13 +255,53 @@
           d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4zm0 2h16v12H4V6zm2 2v2h4V8H6zm6 0v2h6V8h-6zm-6 4v2h4v-2H6zm6 0v2h6v-2h-6zm-6 4v2h10v-2H6z"
         />
       </symbol>
-      <symbol id="icon-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 3v12m0 0l4-4m-4 4l-4-4" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke-linecap="round" />
-      </symbol>
     </svg>
 
     <script>
+      var clientPlatformState = { value: detectClientPlatformSync() }
+
+      function detectClientPlatformSync() {
+        var ua = (navigator.userAgent || "").toLowerCase()
+        if (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1) {
+          return "unknown"
+        }
+        if (/windows|win32|win64|wow64/i.test(ua)) return "windows"
+        if (/iphone|ipad|ipod/i.test(ua)) return "unknown"
+        if (/macintosh|mac os x|mac_powerpc/i.test(ua)) return "macos"
+        if (/android/i.test(ua)) return "unknown"
+        if (/linux|x11|ubuntu|fedora|debian|cros/i.test(ua)) return "linux"
+        return "unknown"
+      }
+
+      function refineClientPlatform() {
+        return new Promise(function (resolve) {
+          var uaData = navigator.userAgentData
+          if (!uaData || typeof uaData.getHighEntropyValues !== "function") {
+            resolve(clientPlatformState.value)
+            return
+          }
+          uaData
+            .getHighEntropyValues(["platform"])
+            .then(function (hints) {
+              var p = String(hints.platform || "").toLowerCase()
+              if (p === "windows") clientPlatformState.value = "windows"
+              else if (p === "macos" || p === "mac") clientPlatformState.value = "macos"
+              else if (p === "linux") clientPlatformState.value = "linux"
+              resolve(clientPlatformState.value)
+            })
+            .catch(function () {
+              resolve(clientPlatformState.value)
+            })
+        })
+      }
+
+      function platformLabel(os) {
+        if (os === "windows") return "Windows"
+        if (os === "macos") return "macOS"
+        if (os === "linux") return "Linux"
+        return ""
+      }
+
       function inferRepoFromGithubIo() {
         var m = location.hostname.match(/^([^.]+)\.github\.io$/i)
         if (!m) return null
@@ -121,6 +344,12 @@
         if (a) a.href = base
         if (b) b.href = base + "/releases"
         if (c) c.href = base + "/actions"
+        var sr = document.getElementById("support-repo")
+        var srel = document.getElementById("support-releases")
+        var sac = document.getElementById("support-actions")
+        if (sr) sr.href = base
+        if (srel) srel.href = base + "/releases"
+        if (sac) sac.href = base + "/actions"
       }
 
       function formatMb(bytes) {
@@ -134,7 +363,7 @@
         return null
       }
 
-      function iconUse(id, label) {
+      function iconUse(id) {
         var span = document.createElement("span")
         span.className = "os-icon"
         span.setAttribute("aria-hidden", "true")
@@ -160,6 +389,9 @@
           card.target = "_blank"
           card.rel = "noopener noreferrer"
         }
+        if (opts.ariaLabel) {
+          card.setAttribute("aria-label", opts.ariaLabel)
+        }
 
         if (opts.recommended) {
           var badge = document.createElement("span")
@@ -168,7 +400,7 @@
           card.appendChild(badge)
         }
 
-        card.appendChild(iconUse(opts.iconId, opts.title))
+        card.appendChild(iconUse(opts.iconId))
 
         var body = document.createElement("div")
         body.className = "platform-body"
@@ -195,11 +427,64 @@
         return card
       }
 
-      function renderFromRelease(data) {
+      function hasInstallerForPlatform(detected, win, mac, appImage, deb) {
+        if (detected === "windows") return !!win
+        if (detected === "macos") return !!mac
+        if (detected === "linux") return !!(appImage || deb)
+        return false
+      }
+
+      function setVersionLines(tag, repo, detected, win, mac, appImage, deb, opts) {
+        opts = opts || {}
+        var versionLine = document.getElementById("version-line")
+        var systemLine = document.getElementById("system-line")
+        var hasAny = !!(win || mac || appImage || deb)
+        if (versionLine) {
+          if (!hasAny && repo) {
+            versionLine.innerHTML =
+              'No files attached for <strong>' +
+              tag +
+              '</strong>. <a href="https://github.com/' +
+              repo +
+              '/releases">Browse releases</a>.'
+          } else if (!hasAny) {
+            versionLine.innerHTML = "No files attached for <strong>" + tag + "</strong>."
+          } else {
+            var line = "Installers for <strong>" + tag + "</strong>"
+            if (opts.primaryIsPrerelease) {
+              line = "Installers for <strong>" + tag + "</strong> <span class=\"version-line__badge\">Pre-release</span>"
+            }
+            if (opts.totalReleases > 1) {
+              line += " · " + opts.totalReleases + " versions listed below"
+            }
+            versionLine.innerHTML = line
+          }
+        }
+        if (!systemLine) return
+        if (detected === "unknown") {
+          systemLine.textContent =
+            "Choose the installer that matches your operating system. Recommended download is highlighted when detected."
+        } else if (hasInstallerForPlatform(detected, win, mac, appImage, deb)) {
+          systemLine.innerHTML =
+            "Your system: <strong>" +
+            platformLabel(detected) +
+            "</strong> — the matching download below is highlighted as recommended."
+        } else {
+          systemLine.innerHTML =
+            "Your system: <strong>" +
+            platformLabel(detected) +
+            "</strong> — no installer for this platform in this release. Try another platform or " +
+            (repo
+              ? '<a href="https://github.com/' + repo + '/releases">view all releases on GitHub</a>.'
+              : "see GitHub Releases.")
+        }
+      }
+
+      function renderFromRelease(data, repo, lineOpts) {
+        lineOpts = lineOpts || {}
         var assets = data.assets || []
         var tag = data.tag_name || data.name || "latest"
-        var vBar = document.getElementById("version-text")
-        if (vBar) vBar.innerHTML = "Latest version: <strong>" + tag + "</strong>"
+        var detected = clientPlatformState.value
 
         var list = document.getElementById("platform-list")
         var loading = document.getElementById("loading-el")
@@ -247,6 +532,17 @@
             ? deb.browser_download_url
             : null
 
+        var recWin = detected === "windows" && !!win
+        var recMac = detected === "macos" && !!mac
+        var recLinux = detected === "linux" && !!(appImage || deb)
+
+        function ariaFor(title, recommended) {
+          if (recommended) return title + ", recommended for your system"
+          return title
+        }
+
+        setVersionLines(tag, repo, detected, win, mac, appImage, deb, lineOpts)
+
         list.appendChild(
           makeCard({
             iconId: "icon-windows",
@@ -255,7 +551,8 @@
             sizeLine: win ? "(" + formatMb(win.size) + ")" : null,
             href: win ? win.browser_download_url : "",
             interactive: !!win,
-            recommended: false,
+            recommended: recWin,
+            ariaLabel: ariaFor("Windows", recWin),
           }),
         )
 
@@ -271,7 +568,8 @@
             sizeLine: mac ? "(" + formatMb(mac.size) + ")" : null,
             href: mac ? mac.browser_download_url : "",
             interactive: !!mac,
-            recommended: true,
+            recommended: recMac,
+            ariaLabel: ariaFor("macOS", recMac),
           }),
         )
 
@@ -283,7 +581,8 @@
             sizeLine: linuxSizeLine,
             href: linuxHref || "",
             interactive: !!(appImage || deb),
-            recommended: false,
+            recommended: recLinux,
+            ariaLabel: ariaFor("Linux", recLinux),
           }),
         )
 
@@ -301,16 +600,31 @@
       }
 
       function renderFallback(repo) {
-        var vBar = document.getElementById("version-text")
-        if (vBar) {
+        var relClear = document.getElementById("releases-list")
+        if (relClear) relClear.innerHTML = ""
+
+        var versionLine = document.getElementById("version-line")
+        var systemLine = document.getElementById("system-line")
+        var detected = clientPlatformState.value
+        if (versionLine) {
           if (repo) {
-            vBar.innerHTML =
+            versionLine.innerHTML =
               'See <a href="https://github.com/' +
               repo +
-              '/releases/latest">GitHub Releases</a> for downloads.'
+              '/releases">GitHub Releases</a> for downloads.'
           } else {
-            vBar.innerHTML =
+            versionLine.innerHTML =
               'Set <code>repository</code> in <code>docs/repo-config.json</code> (or use GitHub Actions deploy).'
+          }
+        }
+        if (systemLine) {
+          if (detected === "unknown") {
+            systemLine.textContent = "Could not load release metadata. Choose a platform on GitHub if downloads are available."
+          } else {
+            systemLine.innerHTML =
+              "Detected: <strong>" +
+              platformLabel(detected) +
+              "</strong>. Open the release page to download manually."
           }
         }
 
@@ -321,36 +635,233 @@
           '<div class="error-block">Could not load release info. Open the latest release on GitHub.</div>'
       }
 
-      loadRepository().then(function (REPO) {
-        wireFooter(REPO)
+      function pickPrimaryRelease(releases) {
+        if (!releases || !releases.length) return null
+        var i
+        for (i = 0; i < releases.length; i++) {
+          if (!releases[i].draft && !releases[i].prerelease) return releases[i]
+        }
+        for (i = 0; i < releases.length; i++) {
+          if (!releases[i].draft) return releases[i]
+        }
+        return releases[0]
+      }
 
-        if (!REPO) {
-          document.getElementById("version-text").textContent =
-            "Unknown GitHub repo — add docs/repo-config.json or open via *.github.io/RepoName/"
-          renderFallback(null)
-          return
+      function renderReleasesList(releases, repo) {
+        var container = document.getElementById("releases-list")
+        if (!container) return
+        container.innerHTML = ""
+        if (!releases || !releases.length) return
+
+        var title = document.createElement("p")
+        title.className = "releases-list__title"
+        title.textContent = "All release versions"
+        container.appendChild(title)
+
+        var ul = document.createElement("ul")
+        ul.className = "releases-list__items"
+
+        var j
+        for (j = 0; j < releases.length; j++) {
+          var rel = releases[j]
+          var tag = rel.tag_name || rel.name || "unknown"
+          var li = document.createElement("li")
+          var a = document.createElement("a")
+          a.href = rel.html_url || "https://github.com/" + repo + "/releases/tag/" + encodeURIComponent(tag)
+          a.target = "_blank"
+          a.rel = "noopener noreferrer"
+          a.textContent = tag
+          li.appendChild(a)
+          if (rel.prerelease) {
+            var badge = document.createElement("span")
+            badge.className = "releases-list__tag"
+            badge.textContent = "Pre-release"
+            li.appendChild(badge)
+          }
+          if (rel.draft) {
+            var d = document.createElement("span")
+            d.className = "releases-list__tag releases-list__tag--draft"
+            d.textContent = "Draft"
+            li.appendChild(d)
+          }
+          ul.appendChild(li)
         }
 
-        fetch("https://api.github.com/repos/" + REPO + "/releases/latest")
+        container.appendChild(ul)
+
+        var more = document.createElement("p")
+        more.className = "releases-list__more"
+        var ma = document.createElement("a")
+        ma.href = "https://github.com/" + repo + "/releases"
+        ma.target = "_blank"
+        ma.rel = "noopener noreferrer"
+        ma.textContent =
+          releases.length >= 100 ? "More releases on GitHub (showing first 100)" : "All releases on GitHub"
+        more.appendChild(ma)
+        container.appendChild(more)
+      }
+
+      function tryLatestReleaseOnly(repo) {
+        return fetch("https://api.github.com/repos/" + repo + "/releases/latest")
           .then(function (r) {
             if (!r.ok) throw new Error("bad")
             return r.json()
           })
-          .then(function (data) {
-            if (!data.assets || !data.assets.length) {
-              document.getElementById("version-text").innerHTML =
-                'No files attached. <a href="https://github.com/' +
-                REPO +
-                '/releases/latest">Open releases</a>.'
-              renderFromRelease(data)
-              return
-            }
-            renderFromRelease(data)
+          .then(function (latest) {
+            return { releases: [latest], source: "latest" }
+          })
+      }
+
+      /**
+       * Prefer full release list (up to 100). If that fails or is empty, fall back to
+       * /releases/latest — same behavior as earlier docs when the list endpoint misbehaves.
+       */
+      function loadReleasesWithFallback(repo) {
+        var base = "https://api.github.com/repos/" + repo + "/releases?per_page=100"
+        return fetch(base)
+          .then(function (r) {
+            if (!r.ok) return tryLatestReleaseOnly(repo)
+            return r.json().then(function (data) {
+              if (Array.isArray(data) && data.length > 0) {
+                return { releases: data, source: "list" }
+              }
+              return tryLatestReleaseOnly(repo)
+            })
           })
           .catch(function () {
-            renderFallback(REPO)
+            return tryLatestReleaseOnly(repo)
           })
-      })
+      }
+
+      function normalizeReleasesPayload(data) {
+        if (!data) return []
+        if (Array.isArray(data)) return data
+        if (data.releases && Array.isArray(data.releases)) return data.releases
+        return []
+      }
+
+      /**
+       * Prefer releases-data.json from the same origin (written by deploy workflow).
+       * Unauthenticated calls to api.github.com from the browser often return 403 (rate limit / abuse).
+       */
+      function loadReleasesForUi(repo) {
+        return fetch("./releases-data.json", { cache: "no-store" })
+          .then(function (r) {
+            if (!r.ok) throw new Error("no static")
+            return r.json()
+          })
+          .then(function (data) {
+            var arr = normalizeReleasesPayload(data)
+            if (!arr.length) throw new Error("empty static")
+            return { releases: arr, source: "static" }
+          })
+          .catch(function () {
+            return loadReleasesWithFallback(repo)
+          })
+      }
+
+      function prefetchSystemLine() {
+        var systemLine = document.getElementById("system-line")
+        if (!systemLine) return
+        var d = clientPlatformState.value
+        if (d === "unknown") {
+          systemLine.textContent = "Detecting your system…"
+        } else {
+          systemLine.innerHTML = "Detected: <strong>" + platformLabel(d) + "</strong>"
+        }
+      }
+
+      prefetchSystemLine()
+
+      refineClientPlatform()
+        .then(function () {
+          prefetchSystemLine()
+          return loadRepository()
+        })
+        .then(function (REPO) {
+          wireFooter(REPO)
+
+          if (!REPO) {
+            document.getElementById("version-line").textContent =
+              "Unknown GitHub repo — add docs/repo-config.json or open via *.github.io/RepoName/"
+            var sl = document.getElementById("system-line")
+            if (sl) {
+              sl.textContent =
+                "Configure the repository to enable automatic release detection."
+            }
+            renderFallback(null)
+            return
+          }
+
+          return loadReleasesForUi(REPO)
+            .then(function (bundle) {
+              var releases = bundle && bundle.releases
+              if (!releases || !releases.length) {
+                renderFallback(REPO)
+                return
+              }
+              var primary = pickPrimaryRelease(releases)
+              if (!primary) {
+                renderFallback(REPO)
+                return
+              }
+              var lineOpts = {
+                totalReleases: releases.length,
+                primaryIsPrerelease: !!primary.prerelease,
+              }
+              renderFromRelease(primary, REPO, lineOpts)
+              renderReleasesList(releases, REPO)
+            })
+            .catch(function () {
+              renderFallback(REPO)
+            })
+        })
+
+      function initTocScrollSpy() {
+        var ids = ["overview", "requirements", "download", "installation", "security", "support"]
+        var nav = document.querySelector(".doc-toc")
+        if (!nav) return
+        var links = nav.querySelectorAll('a[href^="#"]')
+        if (!links.length) return
+
+        function setActive(id) {
+          var idx
+          for (idx = 0; idx < links.length; idx++) {
+            var a = links[idx]
+            var href = a.getAttribute("href") || ""
+            var match = href.slice(1)
+            var on = match === id
+            if (on) {
+              a.classList.add("is-active")
+              a.setAttribute("aria-current", "location")
+            } else {
+              a.classList.remove("is-active")
+              a.removeAttribute("aria-current")
+            }
+          }
+        }
+
+        function onScroll() {
+          var y = window.scrollY + 120
+          var current = ids[0]
+          for (var i = 0; i < ids.length; i++) {
+            var el = document.getElementById(ids[i])
+            if (!el) continue
+            if (el.offsetTop <= y) current = ids[i]
+          }
+          setActive(current)
+        }
+
+        window.addEventListener("scroll", onScroll, { passive: true })
+        window.addEventListener("resize", onScroll, { passive: true })
+        onScroll()
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initTocScrollSpy)
+      } else {
+        initTocScrollSpy()
+      }
     </script>
   </body>
 </html>

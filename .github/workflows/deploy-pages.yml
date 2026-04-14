@@ -33,6 +33,21 @@ jobs:
       - name: Write docs/repo-config.json
         run: printf '%s\n' '{"repository":"${{ github.repository }}"}' > docs/repo-config.json
 
+      # Baked at deploy time so the browser never calls api.github.com (avoids 403 / rate limits from the client).
+      - name: Fetch releases JSON for static docs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          if ! curl -sS -f -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/releases?per_page=100" \
+            -o docs/releases-data.json
+          then
+            echo '[]' > docs/releases-data.json
+          fi
+
       - uses: actions/configure-pages@v4
 
       - uses: actions/upload-pages-artifact@v3
