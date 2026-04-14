@@ -1,7 +1,7 @@
 {
   "name": "randomapigenerator",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.2.5",
   "author": "CodeFryDev (https://codefrydev.in)",
   "homepage": "https://github.com/codefrydev/RandomApiGenerator#readme",
   "repository": {
@@ -58,7 +58,9 @@
   "build": {
     "appId": "com.randomapigenerator.app",
     "productName": "RandomApiGenerator",
-    "asarUnpack": ["**/node_modules/better-sqlite3/**/*"],
+    "asarUnpack": [
+      "**/node_modules/better-sqlite3/**/*"
+    ],
     "directories": {
       "output": "release"
     },
