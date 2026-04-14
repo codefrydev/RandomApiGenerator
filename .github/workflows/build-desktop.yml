@@ -6,9 +6,15 @@ on:
     tags: ["v*"]
   pull_request:
   workflow_dispatch:
+    inputs:
+      version:
+        description: "Semver for this release (e.g. 1.0.0 or v1.0.0). Creates tag vX.Y.Z at the workflow commit."
+        required: true
+        type: string
 
 concurrency:
-  group: build-desktop-${{ github.ref }}
+  # Same branch/tag push cancels superseded runs; workflow_dispatch is keyed by version so different releases can run in parallel.
+  group: build-desktop-${{ github.ref }}-${{ github.event_name == 'workflow_dispatch' && inputs.version || 'ci' }}
   cancel-in-progress: true
 
 jobs:
@@ -81,11 +87,11 @@ jobs:
           path: release/*.AppImage
 
   # GitHub "Releases" only show items created as Releases — not workflow artifacts.
-  # This job runs when you push a tag like v1.0.0 and attaches the three builds to that release.
+  # Runs when you push a tag like v1.0.0, or when you run this workflow manually with a version (creates the release at that tag).
   publish-release:
     name: Publish GitHub Release
     needs: [build-windows, build-macos, build-linux]
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -101,9 +107,37 @@ jobs:
           find artifacts -type f \( -name "*.exe" -o -name "*.dmg" -o -name "*.AppImage" \) -exec cp -f {} release-assets/ \;
           ls -la release-assets
 
-      - name: Create release with assets
+      - name: Set release tag name
+        id: meta
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            RAW='${{ inputs.version }}'
+            RAW="${RAW#v}"
+            if ! echo "$RAW" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+              echo "::error::version must be semver X.Y.Z (optionally prefixed with v)"
+              exit 1
+            fi
+            echo "tag_name=v${RAW}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag_name=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create release with assets (git tag push)
+        if: github.event_name != 'workflow_dispatch'
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.meta.outputs.tag_name }}
+          files: release-assets/*
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create release with assets (workflow dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.meta.outputs.tag_name }}
+          target_commitish: ${{ github.sha }}
           files: release-assets/*
           generate_release_notes: true
         env:

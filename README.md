@@ -71,3 +71,18 @@ export default defineConfig([
   },
 ])
 ```
+
+## Releasing (desktop)
+
+Desktop builds are published to **GitHub Releases** (Windows `.exe`, macOS `.dmg`, Linux `.AppImage`), not as workflow artifacts on the Releases tab.
+
+**Option A — tag push:** create and push a semver tag on `main` (or the commit you want to ship):
+
+```bash
+git tag v1.2.3
+git push origin v1.2.3
+```
+
+**Option B — Actions UI:** open **Actions → Build desktop → Run workflow**, choose the branch (usually `main`), enter **version** as `X.Y.Z` or `vX.Y.Z`, and run. That creates the `vX.Y.Z` tag at the workflow commit and attaches the built assets.
+
+Align [`package.json`](package.json) `version` with the release when you cut a version users will download; `electron-builder` uses it for app metadata.
