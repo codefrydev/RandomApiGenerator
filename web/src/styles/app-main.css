@@ -444,6 +444,11 @@
   color: var(--color-text-muted);
 }
 
+.pm-request__body .pm-json-editor {
+  width: 100%;
+  border-radius: var(--radius-md);
+}
+
 .pm-request__url-wrap {
   flex: 1;
   min-width: 0;

@@ -6,6 +6,7 @@ import { useTabListKeyboard } from '../hooks/useTabListKeyboard'
 import { OverviewSection } from './OverviewSection'
 import { RequestCodeSamples } from './RequestCodeSamples'
 import { ResponseViewer } from './ResponseViewer'
+import { LazyJsonCodeEditor } from './LazyJsonCodeEditor'
 
 type ElectronApi = NonNullable<Window['electronAPI']>
 
@@ -165,18 +166,20 @@ export function QueryApiWorkspace({
             </p>
 
             {q.showBody && (
-              <div className="pm-request__body">
-                <label className="pm-request__body-label" htmlFor="pm-query-api-body">
+              <div
+                className="pm-request__body"
+                role="group"
+                aria-labelledby="pm-query-api-body-label"
+              >
+                <span id="pm-query-api-body-label" className="pm-request__body-label">
                   Body (JSON)
-                </label>
-                <textarea
-                  id="pm-query-api-body"
-                  className="pm-request__body-input"
+                </span>
+                <LazyJsonCodeEditor
+                  compact
                   value={q.requestBody}
-                  onChange={(e) => q.setRequestBody(e.target.value)}
+                  onChange={q.setRequestBody}
                   placeholder="Optional JSON body (POST, PUT, PATCH)"
-                  spellCheck={false}
-                  aria-label="Request body JSON"
+                  aria-labelledby="pm-query-api-body-label"
                 />
               </div>
             )}

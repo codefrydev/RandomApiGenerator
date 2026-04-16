@@ -1,4 +1,5 @@
 import { HTTP_METHODS, type HttpMethod } from '../types'
+import { LazyJsonCodeEditor } from './LazyJsonCodeEditor'
 
 export type RequestSectionProps = {
   running: boolean
@@ -113,18 +114,20 @@ export function RequestSection({
       )}
 
       {showRequestBodyEditor && (
-        <div className="pm-request__body">
-          <label className="pm-request__body-label" htmlFor="pm-request-body">
+        <div
+          className="pm-request__body"
+          role="group"
+          aria-labelledby="pm-request-body-label"
+        >
+          <span id="pm-request-body-label" className="pm-request__body-label">
             Body (JSON)
-          </label>
-          <textarea
-            id="pm-request-body"
-            className="pm-request__body-input"
+          </span>
+          <LazyJsonCodeEditor
+            compact
             value={requestBody}
-            onChange={(e) => onRequestBodyChange(e.target.value)}
+            onChange={onRequestBodyChange}
             placeholder="Optional JSON object to merge with the mock response"
-            spellCheck={false}
-            aria-label="Request body JSON"
+            aria-labelledby="pm-request-body-label"
           />
         </div>
       )}

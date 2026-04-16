@@ -290,7 +290,7 @@ export function OverviewSection({
         return <code>200</code> with one object (optional JSON body is shallow-merged);{' '}
         <strong>DELETE</strong> returns <code>204</code>. Use <strong>Mock server behavior</strong> on the
         Response tab for delays, status overrides, and named examples. On the <strong>Response</strong>{' '}
-        tab, use a <strong>field list</strong> or an <strong>example response</strong> (JSON); start the
+        tab, use a <strong>field list</strong> or <strong>advanced</strong> JSON; start the
         server, choose a method, then <strong>Send</strong> to preview.
       </p>
       {Boolean(electron) && (

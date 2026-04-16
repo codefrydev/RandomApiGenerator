@@ -15,7 +15,7 @@ function countJsonKeys(
   depth: number,
 ): { ok: true; count: number } | { ok: false; error: string } {
   if (depth > SAMPLE_JSON_MAX_DEPTH) {
-    return { ok: false, error: 'example response JSON is nested too deeply' }
+    return { ok: false, error: 'advanced JSON is nested too deeply' }
   }
   if (node === null || typeof node !== 'object') {
     return { ok: true, count: 0 }
@@ -32,14 +32,14 @@ function countJsonKeys(
   const o = node as Record<string, unknown>
   let total = Object.keys(o).length
   if (total > SAMPLE_JSON_MAX_KEYS) {
-    return { ok: false, error: 'example response has too many keys' }
+    return { ok: false, error: 'advanced JSON has too many keys' }
   }
   for (const v of Object.values(o)) {
     const r = countJsonKeys(v, depth + 1)
     if (!r.ok) return r
     total += r.count
     if (total > SAMPLE_JSON_MAX_KEYS) {
-      return { ok: false, error: 'example response has too many keys' }
+      return { ok: false, error: 'advanced JSON has too many keys' }
     }
   }
   return { ok: true, count: total }
@@ -57,7 +57,7 @@ function validateEndpointExamples(
   examples: EndpointConfig['examples'],
 ): { ok: true } | { ok: false; error: string } {
   if (!Array.isArray(examples) || examples.length === 0) {
-    return { ok: false, error: 'named examples required when using example response source' }
+    return { ok: false, error: 'named examples required when body source is named example' }
   }
   if (examples.length > 20) {
     return { ok: false, error: 'too many named examples' }
@@ -158,22 +158,22 @@ export function validateEndpointsConfig(
     const mode = ep.responseMode === 'sampleJson' ? 'sampleJson' : 'schema'
     if (mode === 'sampleJson') {
       if (typeof ep.sampleJson !== 'string' || ep.sampleJson.trim() === '') {
-        return { ok: false, error: 'example response mode requires non-empty JSON text' }
+        return { ok: false, error: 'advanced JSON mode requires non-empty JSON text' }
       }
       if (ep.sampleJson.length > SAMPLE_JSON_MAX_CHARS) {
-        return { ok: false, error: 'example response text is too large' }
+        return { ok: false, error: 'advanced JSON text is too large' }
       }
       let parsed: unknown
       try {
         parsed = JSON.parse(ep.sampleJson)
       } catch {
-        return { ok: false, error: 'invalid JSON in example response' }
+        return { ok: false, error: 'invalid JSON in advanced mode' }
       }
       if (parsed === null || typeof parsed !== 'object') {
-        return { ok: false, error: 'example response must be a JSON object or array' }
+        return { ok: false, error: 'advanced JSON must be a JSON object or array' }
       }
       if (Array.isArray(parsed) && parsed.length === 0) {
-        return { ok: false, error: 'example response array must not be empty' }
+        return { ok: false, error: 'advanced JSON array must not be empty' }
       }
       const keyCheck = countJsonKeys(parsed, 0)
       if (!keyCheck.ok) {

@@ -1,6 +1,13 @@
+import { lazy, Suspense } from 'react'
 import { useTabListKeyboard } from '../hooks/useTabListKeyboard'
 import type { ResponseMeta } from '../types'
 import { formatBytes } from '../lib/formatBytes'
+import { inferResponseBodyLanguage } from '../lib/inferResponseBodyLanguage'
+
+const CodeMirrorReadonly = lazy(async () => {
+  const m = await import('./CodeMirrorReadonly')
+  return { default: m.CodeMirrorReadonly }
+})
 
 const RESPONSE_BODY_TAB_IDS = ['pm-response-body-pretty', 'pm-response-body-raw'] as const
 
@@ -95,7 +102,20 @@ export function ResponseViewer({
             {fetchError}
           </p>
         )}
-        {preview && <pre className="pm-code">{bodyView === 'pretty' ? preview : rawBody}</pre>}
+        {preview && (
+          <Suspense
+            fallback={
+              <pre className="pm-code">{bodyView === 'pretty' ? preview : rawBody}</pre>
+            }
+          >
+            <CodeMirrorReadonly
+              key={`${bodyView}-${preview.length}-${rawBody.length}`}
+              value={bodyView === 'pretty' ? preview : rawBody}
+              language={inferResponseBodyLanguage(bodyView === 'pretty' ? preview : rawBody)}
+              aria-label={bodyView === 'pretty' ? 'Response body, formatted' : 'Response body, raw'}
+            />
+          </Suspense>
+        )}
         {!preview && !fetchError && (
           <div className="pm-response__empty">
             <p className="pm-response__empty-title">No response yet</p>

@@ -1,6 +1,11 @@
-import { useCallback, useMemo, useState } from 'react'
+import { lazy, Suspense, useCallback, useMemo, useState } from 'react'
 import { buildCodeSamples, type RequestCodeSpec } from '../lib/requestCodeSamples'
 import { useTabListKeyboard } from '../hooks/useTabListKeyboard'
+
+const CodeSamplesMirror = lazy(async () => {
+  const m = await import('./CodeSamplesMirror')
+  return { default: m.CodeSamplesMirror }
+})
 
 type CodeTab = 'curl' | 'python' | 'csharp'
 
@@ -95,11 +100,20 @@ export function RequestCodeSamples({ spec }: RequestCodeSamplesProps) {
           </span>
         </div>
       </div>
-      {/* Focusable so keyboard users can scroll overflow; pre is not an interactive role per jsx-a11y */}
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
-      <pre className="pm-code-samples__pre" tabIndex={0}>
-        {activeText}
-      </pre>
+      <Suspense
+        fallback={
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- scrollable overflow region
+          <pre className="pm-code-samples__pre" tabIndex={0}>
+            {activeText}
+          </pre>
+        }
+      >
+        <CodeSamplesMirror
+          key={lang}
+          value={activeText}
+          lang={lang}
+        />
+      </Suspense>
     </section>
   )
 }

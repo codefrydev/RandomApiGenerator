@@ -64,6 +64,14 @@
   word-break: break-word;
 }
 
+.pm-code-samples__cm {
+  margin: 0;
+  max-height: min(40vh, 280px);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
 .pm-request__meta {
   margin-top: 10px;
   display: flex;

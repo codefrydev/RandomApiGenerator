@@ -7,6 +7,7 @@ import type {
   SchemaFieldType,
 } from '../types'
 import { FIELD_TYPES } from '../constants'
+import { LazyJsonCodeEditor } from './LazyJsonCodeEditor'
 
 export type ResponseDefinitionSectionProps = {
   tree: PersistedAppState
@@ -200,15 +201,13 @@ export function ResponseDefinitionSection({
                     Active
                   </label>
                 </div>
-                <textarea
-                  className="pm-textarea pm-textarea--compact"
-                  rows={5}
+                <LazyJsonCodeEditor
+                  compact
                   value={ex.body}
                   disabled={running}
-                  spellCheck={false}
-                  onChange={(e) => {
+                  onChange={(v) => {
                     const next = [...(selected.examples ?? [])]
-                    next[i] = { ...ex, body: e.target.value }
+                    next[i] = { ...ex, body: v }
                     onUpdateMock({ examples: next })
                   }}
                 />
@@ -240,37 +239,40 @@ export function ResponseDefinitionSection({
             onClick={() => onSetResponseMode('sampleJson')}
             aria-pressed={responseMode === 'sampleJson'}
           >
-            Example response
+            Advanced
           </button>
         </div>
         <p className="pm-schema__mode-hint">
           {responseMode === 'schema'
-            ? 'The field list and example response stay in sync for flat objects (primitive values only). Nested objects or arrays in JSON do not update the table.'
+            ? 'The field list and advanced JSON stay in sync for flat objects (primitive values only). Nested objects or arrays in JSON do not update the table.'
             : 'Flat objects sync to the field list automatically. Nested shapes only apply in this editor — they do not update the table.'}
         </p>
       </div>
 
       {responseMode === 'sampleJson' && (
-        <div className="pm-example-response">
-          <label
+        <div
+          className="pm-example-response"
+          role="group"
+          aria-labelledby={`advanced-json-label-${tree.selectedCollectionId}-${tree.selectedRouteIndex}`}
+        >
+          <span
+            id={`advanced-json-label-${tree.selectedCollectionId}-${tree.selectedRouteIndex}`}
             className="pm-example-response__label"
-            htmlFor={`example-response-${tree.selectedCollectionId}-${tree.selectedRouteIndex}`}
           >
-            Example response body (JSON)
-          </label>
-          <textarea
-            id={`example-response-${tree.selectedCollectionId}-${tree.selectedRouteIndex}`}
-            className={`pm-textarea ${exampleResponseError ? 'pm-textarea--err' : ''}`}
+            Response body (JSON)
+          </span>
+          <LazyJsonCodeEditor
+            key={`advanced-json-${tree.selectedCollectionId}-${tree.selectedRouteIndex}`}
             value={selected.sampleJson ?? ''}
-            onChange={(e) => onUpdateSampleJson(e.target.value)}
+            onChange={onUpdateSampleJson}
             disabled={running}
-            spellCheck={false}
+            hasError={Boolean(exampleResponseError)}
+            aria-labelledby={`advanced-json-label-${tree.selectedCollectionId}-${tree.selectedRouteIndex}`}
             aria-invalid={Boolean(exampleResponseError)}
-            aria-describedby={exampleResponseError ? 'example-response-error' : undefined}
-            rows={14}
+            aria-describedby={exampleResponseError ? 'advanced-json-error' : undefined}
           />
           {exampleResponseError && (
-            <p id="example-response-error" className="pm-example-response__error" role="alert">
+            <p id="advanced-json-error" className="pm-example-response__error" role="alert">
               {exampleResponseError}
             </p>
           )}

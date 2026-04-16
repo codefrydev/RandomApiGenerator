@@ -37,7 +37,7 @@ export interface EndpointConfig {
   schema: SchemaField[]
   /** How to build mock responses. Defaults to `schema` when omitted. */
   responseMode?: EndpointResponseMode
-  /** Example response body (JSON text); used when `responseMode` is `sampleJson`. */
+  /** Response body JSON text; used when `responseMode` is `sampleJson` (Advanced mode). */
   sampleJson?: string
   /** Per-route HTTP method; falls back to global `requestMethod` when omitted. */
   method?: HttpMethod

@@ -231,7 +231,7 @@ export function useRandomApiApp() {
   const exampleResponseError = useMemo(() => {
     if (responseMode !== 'sampleJson' || !selected) return null
     const raw = selected.sampleJson ?? ''
-    if (!raw.trim()) return 'Paste an example response body (JSON) to define the shape.'
+    if (!raw.trim()) return 'Paste a JSON response body to define the shape.'
     try {
       const parsed: unknown = JSON.parse(raw)
       if (parsed === null || typeof parsed !== 'object') {
